@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from rest_framework.utils import serializer_helpers
 from .serilalizers import MovieSerializer
 from .models import Movie
 

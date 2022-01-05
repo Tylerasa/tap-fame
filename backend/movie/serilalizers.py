@@ -1,10 +1,16 @@
-from django.contrib.admin.options import ModelAdmin
-from django.db import models
-from django.db.models import fields
 from rest_framework import serializers
-from .admin import MovieAdmin
+from .models import Actor, Movie
+
+
+class ActorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Actor()
+        fields = '__all__'
+
 
 class MovieSerializer(serializers.ModelSerializer):
+    actor = ActorSerializer()
+
     class Meta:
-        model  = ModelAdmin
-        fields = ('title', 'comment', 'synopsis', 'rating', 'your_rating', 'reviewed', 'release_date')
+        model  = Movie
+        fields = ('title', 'comment', 'synopsis', 'rating', 'your_rating', 'reviewed', 'release_date', 'actor')
