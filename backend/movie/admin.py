@@ -7,7 +7,7 @@ from .models import Movie, Actor
 admin.site.site_header="Movie Admin"
 
 
-class ActorInline(admin.ModelAdmin):
+class ActorInline(admin.TabularInline):
     model = Actor
     extra = 2
 
