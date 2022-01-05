@@ -1,9 +1,9 @@
 from django.db import models
 
 class Movie(models.Model):
-    title = models.CharField(max_length=100, default='Movie Title')
-    comment = models.TextField(null=True)
-    synopsis = models.TextField(null=True)
+    title = models.CharField(max_length=100)
+    comment = models.TextField()
+    synopsis = models.TextField()
     rating = models.FloatField(default=0)
     your_rating = models.FloatField(default=0)
     reviewed = models.BooleanField(default=False)
@@ -14,7 +14,7 @@ class Movie(models.Model):
 
 class Actor(models.Model):
     movie = models.ForeignKey(Movie, default='Movie',  on_delete=models.CASCADE)
-    name = models.CharField(max_length=100, default="Actor Name")
+    name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name

@@ -14,7 +14,7 @@ class ActorInline(admin.TabularInline):
 
 class MovieAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields':['name', 'comment', 'synopsis', 'rating', 'your_rating', 'reviewed', 'release_date']}),
+        (None, {'fields':['title', 'comment', 'synopsis', 'rating', 'your_rating', 'reviewed', 'release_date']}),
     ]
     inlines =[ActorInline]
 
