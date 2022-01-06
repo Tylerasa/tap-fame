@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'movie',
     'corsheaders',
     'rest_framework',
+    'frontend'
 ]
 
 MIDDLEWARE = [
