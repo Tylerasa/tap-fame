@@ -16,8 +16,14 @@ const MovieList = () => {
       {movies
         ? movies.map((ele, i) => {
             return (
-              <div style={{backgroundColor: "crimson"}} key={i} className="div1">
-                {ele.title}
+              <div style={{ backgroundColor: "crimson", margin: "auto" }} key={i}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/` + ele.poster_path}
+                  width="150px"
+                  height="225px"
+                  style={{borderRadius: "8px"}}
+                />
+                <p style={{fontSize: "14px", fontWeight: "bold"}}>{ele.title}</p>
               </div>
             );
           })
