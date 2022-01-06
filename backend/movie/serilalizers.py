@@ -4,13 +4,13 @@ from .models import Actor, Movie
 
 class ActorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Actor()
+        model = Actor
         fields = '__all__'
 
 
 class MovieSerializer(serializers.ModelSerializer):
-    actor = ActorSerializer()
+    actor = ActorSerializer(source='actor_set', many=True)
 
     class Meta:
         model  = Movie
-        fields = ('title', 'comment', 'synopsis', 'rating', 'your_rating', 'reviewed', 'release_date', 'actor')
+        fields = '__all__'
