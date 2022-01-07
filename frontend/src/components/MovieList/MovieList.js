@@ -82,13 +82,13 @@ const MovieList = () => {
                         alignItems: "center",
                       }}
                     >
-                      89
+                      {ele.vote_average}
                     </span>
                   </div>
                   <p
                     style={{ fontSize: "14px", fontWeight: "bold", margin: 0 }}
                   >
-                    {ele.title}
+                    {ele.title ? ele.title : ele.original_name}
                   </p>
                 </div>
               </div>

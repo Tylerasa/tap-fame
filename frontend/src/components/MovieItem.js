@@ -37,7 +37,9 @@ const MovieItem = () => {
           borderRadius: "8px",
         }}
       />
-      <h2 style={{ marginTop: "90px", textAlign: "center" }}>{movie.title}</h2>
+      <h2 style={{ marginTop: "90px", textAlign: "center" }}>
+        {movie.title ? movie.title : movie.original_name}
+      </h2>
       <p
         style={{
           padding: "20px",
@@ -63,12 +65,18 @@ const MovieItem = () => {
             fontSize: "16px",
             outline: "#ddd",
             fontFamily: "Inter",
-            
           }}
           type="text"
         />
       </div>
-      <div style={{textAlign: "center", marginTop: "20px", marginBottom: "20px", cursor: "pointer"}}>
+      <div
+        style={{
+          textAlign: "center",
+          marginTop: "20px",
+          marginBottom: "20px",
+          cursor: "pointer",
+        }}
+      >
         <span
           style={{
             backgroundColor: "#111",
