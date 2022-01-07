@@ -1,15 +1,22 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 const MovieItem = () => {
   const location = useLocation();
   console.log("movie item", location.state);
   const [movie, setMoive] = useState(location.state);
+  const [comment, setComment] = useState("");
+  const handleSubmit = () => {
+      var item = {
+          comment,
+          title: movie. movie.original_name,
+          synposis: movie.overview,
+          rating: movie.vote_average
+      }
+      axios.post("")
+  };
   return (
-    <div
-    //   style={{ paddingTop: "20px" }}
-
-    // className="container"
-    >
+    <div>
       <div
         style={{
           margin: "auto",
@@ -57,6 +64,7 @@ const MovieItem = () => {
         }}
       >
         <textarea
+          onChange={(e) => setComment(e.target.value)}
           style={{
             display: "block",
             padding: "10px 5px",
@@ -78,6 +86,7 @@ const MovieItem = () => {
         }}
       >
         <span
+          onClick={handleClick}
           style={{
             backgroundColor: "#111",
             padding: "8px 20px",
