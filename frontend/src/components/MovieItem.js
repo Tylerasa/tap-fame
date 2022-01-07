@@ -31,17 +31,56 @@ const MovieItem = () => {
         src={`https://image.tmdb.org/t/p/w500/` + movie.poster_path}
         width="200px"
         style={{
-          position: "abolute",
+          position: "absolute",
           left: "10%",
           top: "20%",
           borderRadius: "8px",
         }}
       />
       <h2 style={{ marginTop: "90px", textAlign: "center" }}>{movie.title}</h2>
-      <p style={{
+      <p
+        style={{
           padding: "20px",
-          textAlign:"center"
-      }}>{movie.overview}</p>
+          textAlign: "center",
+        }}
+      >
+        {movie.overview}
+      </p>
+      <h3 style={{ textAlign: "center" }}>Post Your Review Here 👇🏾</h3>
+      <div
+        style={{
+          maxWidth: "750px",
+          margin: "0 auto",
+          padding: "0 20px",
+        }}
+      >
+        <textarea
+          style={{
+            display: "block",
+            padding: "10px 5px",
+            width: "100%",
+            borderRadius: "10px",
+            fontSize: "16px",
+            outline: "#ddd",
+            fontFamily: "Inter",
+            
+          }}
+          type="text"
+        />
+      </div>
+      <div style={{textAlign: "center", marginTop: "20px", marginBottom: "20px", cursor: "pointer"}}>
+        <span
+          style={{
+            backgroundColor: "#111",
+            padding: "8px 20px",
+            color: "white",
+            borderRadius: "18px",
+            textAlign: "center",
+          }}
+        >
+          Submit
+        </span>
+      </div>
       {/* <div
         style={{
           margin: "auto",
