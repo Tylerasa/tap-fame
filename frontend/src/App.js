@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import MovieList from "./components/MovieList/MovieList";
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import MovieItem from "./components/MovieItem";
 function App() {
   useEffect(() => {
     axios
@@ -12,9 +13,12 @@ function App() {
   }, []);
 
   return (
-    <div className="container">
-      <MovieList />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<MovieList />} />
+        <Route path="/movie" element={<MovieItem />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "./MovieList.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const MovieList = () => {
+  const navigate = useNavigate();
+
   const [movies, setMoives] = useState([]);
+
   useEffect(() => {
     axios
       .get(
@@ -11,6 +15,13 @@ const MovieList = () => {
       )
       .then((res) => setMoives(res.data.results));
   }, []);
+
+  const handleClick = (ele) => {
+    console.log(ele);
+
+    navigate("/movie", { state: ele });
+  };
+
   return (
     <div
       style={{
@@ -21,7 +32,7 @@ const MovieList = () => {
         display: "flex",
         paddingTop: "20px",
       }}
-      // className="grid-container"
+      className="container"
     >
       {movies
         ? movies.map((ele, i) => {
@@ -43,7 +54,8 @@ const MovieList = () => {
                     src={`https://image.tmdb.org/t/p/w500/` + ele.poster_path}
                     width="150px"
                     height="225px"
-                    style={{ borderRadius: "8px" }}
+                    style={{ borderRadius: "8px", cursor: "pointer" }}
+                    onClick={() => handleClick(ele)}
                   />
                 </div>
                 <div
