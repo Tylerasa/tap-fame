@@ -86,7 +86,7 @@ const MovieItem = () => {
         }}
       >
         <span
-          onClick={handleClick}
+          onClick={handleSubmit}
           style={{
             backgroundColor: "#111",
             padding: "8px 20px",
