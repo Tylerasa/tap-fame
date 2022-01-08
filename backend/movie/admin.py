@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from .models import Movie, Actor
-
+from .models import CustomUser
 
 
 admin.site.site_header="Movie Admin"
@@ -19,5 +19,10 @@ class MovieAdmin(admin.ModelAdmin):
     inlines =[ActorInline]
 
 
+
+class CustomUserAdmin(admin.ModelAdmin):
+    model = CustomUser
+
+admin.site.register(CustomUser, CustomUserAdmin)
 
 admin.site.register(Movie, MovieAdmin)
