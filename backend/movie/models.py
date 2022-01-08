@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 class Movie(models.Model):
     title = models.CharField(max_length=100)
     comment = models.TextField()
@@ -8,6 +8,7 @@ class Movie(models.Model):
     your_rating = models.FloatField(default=0)
     reviewed = models.BooleanField(default=False)
     release_date = models.DateField('release date')
+    user = models.ForeignKey(User, related_name="movies", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.title

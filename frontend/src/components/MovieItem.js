@@ -1,20 +1,31 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import StarRating from "react-svg-star-rating";
+
 const MovieItem = () => {
   const location = useLocation();
-  console.log("movie item", location.state);
   const [movie, setMoive] = useState(location.state);
   const [comment, setComment] = useState("");
-  const handleSubmit = () => {
-      var item = {
-          comment,
-          title: movie. movie.original_name,
-          synposis: movie.overview,
-          rating: movie.vote_average
-      }
-      axios.post("")
+  const [movieRating, setMovieRating] = useState(0);
+  const handleRating = (rating) => {
+    setMovieRating(rating);
   };
+
+  const handleSubmit = () => {
+    var item = {
+      comment,
+      title: movie.original_name,
+      synposis: movie.overview,
+      rating: movieRating || movie.vote_average,
+      reviewed: true,
+      release_date: movie.first_air_date,
+    };
+    console.log(item);
+    axios.post("/api/movies/", item).then((res) => console.log(res));
+  };
+
+  useEffect(() => {});
   return (
     <div>
       <div
@@ -76,6 +87,18 @@ const MovieItem = () => {
           }}
           type="text"
         />
+      </div>
+      <div
+        style={{
+          textAlign: "center",
+          marginTop: "20px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <StarRating count={10} unit="float" handleOnClick={handleRating} />{" "}
+        {movieRating}
       </div>
       <div
         style={{
