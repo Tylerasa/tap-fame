@@ -175,3 +175,6 @@ CORS_ORIGIN_WHITELIST = (
     'google.com',
     'http://localhost:8000'
 )
+
+
+CSRF_COOKIE_NAME = "XSRF-TOKEN"
