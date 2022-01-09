@@ -128,7 +128,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "movie.CustomUser"
+AUTH_USER_MODEL = 'movie.User'
 
 # CORS_ORIGIN_WHITELIST = [
 #      'http://localhost:3000/'
