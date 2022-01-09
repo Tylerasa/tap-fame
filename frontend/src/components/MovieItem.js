@@ -15,27 +15,32 @@ const MovieItem = () => {
   const handleSubmit = () => {
     var item = {
       comment,
-      title: movie.original_name,
-      synposis: movie.overview,
+      title: movie.title || movie.original_name,
+      synopsis: movie.overview,
       rating: movieRating || movie.vote_average,
       reviewed: true,
-      release_date: movie.first_air_date,
+      release_date: movie.release_date,
+      your_rating: movie.vote_average
     };
 
-    axios.defaults.xsrfHeaderName = "X-CSRFToken";
-    axios.defaults.xsrfCookieName = "csrftoken";
-    const headers = {
-      "Content-Type": "application/json",
-      xsrfHeaderName: "X-CSRFToken",
-      "Access-Control-Allow-Origin": "*",
-      Authorization: `Basic ${localStorage.getItem("token")}`,
-    };
+    // axios.defaults.xsrfHeaderName = "X-CSRFToken";
+    // axios.defaults.xsrfCookieName = "csrftoken";
+    // const headers = {
+    //   "Content-Type": "application/json",
+    //   xsrfHeaderName: "X-CSRFToken",
+    //   "Access-Control-Allow-Origin": "http://localhost:8000",
+    //   Authorization: `Basic ${localStorage.getItem("token")}`,
+    // };
 
     console.log(item);
     axios
-      .post("/api/movies/", item, {
-        headers: headers,
-      })
+      .post(
+        "http://localhost:8000/api/movies/",
+        item
+        //  {
+        //   headers: headers,
+        // }
+      )
       .then((res) => console.log(res));
   };
 
