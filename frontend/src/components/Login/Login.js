@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -12,7 +15,12 @@ const Login = () => {
     };
     axios
       .post("/auth/login/", item)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("token", res.data.access);
+        localStorage.setItem("refreshToken", res.data.refresh);
+        navigate("/movies");
+      })
       .catch((err) => console.log(err));
   };
 
