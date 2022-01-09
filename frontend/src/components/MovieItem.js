@@ -54,6 +54,7 @@ const MovieItem = () => {
           top: "20%",
           borderRadius: "8px",
         }}
+        alt={movie.original_name}
       />
       <h2 style={{ marginTop: "90px", textAlign: "center" }}>
         {movie.title ? movie.title : movie.original_name}

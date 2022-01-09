@@ -56,6 +56,7 @@ const MovieList = () => {
                     height="225px"
                     style={{ borderRadius: "8px", cursor: "pointer" }}
                     onClick={() => handleClick(ele)}
+                    alt={ele.original_name}
                   />
                 </div>
                 <div
