@@ -22,9 +22,13 @@ const MovieItem = () => {
       release_date: movie.first_air_date,
     };
 
+    axios.defaults.xsrfHeaderName = "X-CSRFToken";
+    axios.defaults.xsrfCookieName = "csrftoken";
     const headers = {
       "Content-Type": "application/json",
       xsrfHeaderName: "X-CSRFToken",
+      "Access-Control-Allow-Origin": "*",
+      Authorization: `Basic ${localStorage.getItem("token")}`,
     };
 
     console.log(item);
