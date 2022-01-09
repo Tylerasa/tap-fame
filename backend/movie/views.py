@@ -6,9 +6,10 @@ from .models import User
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import filters
-
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 
 class MovieView(viewsets.ModelViewSet):
+    authentication_classes = (SessionAuthentication, BasicAuthentication, TokenAuthentication)
     serializer_class  = MovieSerializer
     queryset = Movie.objects.all()
 
