@@ -21,8 +21,18 @@ const MovieItem = () => {
       reviewed: true,
       release_date: movie.first_air_date,
     };
+
+    const headers = {
+      "Content-Type": "application/json",
+      xsrfHeaderName: "X-CSRFToken",
+    };
+
     console.log(item);
-    axios.post("/api/movies/", item).then((res) => console.log(res));
+    axios
+      .post("/api/movies/", item, {
+        headers: headers,
+      })
+      .then((res) => console.log(res));
   };
 
   useEffect(() => {});
