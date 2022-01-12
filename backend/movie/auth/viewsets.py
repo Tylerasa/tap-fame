@@ -11,6 +11,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.contrib.auth.models import User
+
 
 class LoginViewSet(ModelViewSet, TokenObtainPairView):
     serializer_class = LoginSerializer
@@ -27,6 +29,11 @@ class LoginViewSet(ModelViewSet, TokenObtainPairView):
 
         return Response(serializer.validated_data, status=status.HTTP_200_OK)
 
+
+    def get(self, request, format=None):
+        users = User.objects.all()
+        serializer = LoginSerializer(users, many=True)
+        return Response(serializer.data)
 
 class RegistrationViewSet(ModelViewSet, TokenObtainPairView):
     serializer_class = RegisterSerializer

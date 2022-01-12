@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import StarRating from "react-svg-star-rating";
 
@@ -8,6 +8,13 @@ const MovieItem = () => {
   const [movie, setMoive] = useState(location.state);
   const [comment, setComment] = useState("");
   const [movieRating, setMovieRating] = useState(0);
+  const [movieComments, setMovieComments] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
+  const [iniRating, setIntiRating] = useState(0);
+
+  const textArea = useRef();
+  const submitButton = useRef();
+
   const handleRating = (rating) => {
     setMovieRating(rating);
   };
@@ -19,32 +26,24 @@ const MovieItem = () => {
       synopsis: movie.overview,
       rating: movieRating || movie.vote_average,
       reviewed: true,
-      release_date: movie.release_date,
-      your_rating: movie.vote_average
+      release_date: movie.release_date || movie.first_air_date,
+      your_rating: movie.vote_average,
     };
 
-    // axios.defaults.xsrfHeaderName = "X-CSRFToken";
-    // axios.defaults.xsrfCookieName = "csrftoken";
-    // const headers = {
-    //   "Content-Type": "application/json",
-    //   xsrfHeaderName: "X-CSRFToken",
-    //   "Access-Control-Allow-Origin": "http://localhost:8000",
-    //   Authorization: `Basic ${localStorage.getItem("token")}`,
-    // };
-
-    console.log(item);
-    axios
-      .post(
-        "http://localhost:8000/api/movies/",
-        item
-        //  {
-        //   headers: headers,
-        // }
-      )
-      .then((res) => console.log(res));
+    // console.log(item);
+    axios.post("/movies/add", item).then((res) => setSubmitted(!submitted));
+    textArea.current.value = "";
+    textArea.current.focus();
+    setMovieRating(0);
+    setIntiRating(0);
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    axios.get(`/movies/movie/${location.state.original_name}`).then((res) => {
+      setMovieComments(res.data);
+      console.log(res.data);
+    });
+  }, [submitted]);
   return (
     <div>
       <div
@@ -86,6 +85,25 @@ const MovieItem = () => {
       >
         {movie.overview}
       </p>
+
+      <h2 style={{ textAlign: "center" }}>Reviews</h2>
+      <div style={{ maxWidth: "1400px", margin: "auto" }}>
+        {movieComments.length > 0 ? (
+          movieComments.map((ele) => {
+            return (
+              <p style={{ textAlign: "center" }} key={ele._id}>
+                {ele.comment},{" "}
+                <i style={{ fontSize: "smaller", color: "#555" }}>
+                  {ele.updatedAt}
+                </i>
+              </p>
+            );
+          })
+        ) : (
+          <p style={{ textAlign: "center" }}>No Reviews Yet</p>
+        )}
+      </div>
+
       <h3 style={{ textAlign: "center" }}>Post Your Review Here 👇🏾</h3>
       <div
         style={{
@@ -95,6 +113,7 @@ const MovieItem = () => {
         }}
       >
         <textarea
+          ref={textArea}
           onChange={(e) => setComment(e.target.value)}
           style={{
             display: "block",
@@ -117,7 +136,12 @@ const MovieItem = () => {
           alignItems: "center",
         }}
       >
-        <StarRating count={10} unit="float" handleOnClick={handleRating} />{" "}
+        <StarRating
+          count={10}
+          unit="float"
+          handleOnClick={handleRating}
+          initialRating={movieRating}
+        />{" "}
         {movieRating}
       </div>
       <div
@@ -129,6 +153,7 @@ const MovieItem = () => {
         }}
       >
         <span
+          ref={submitButton}
           onClick={handleSubmit}
           style={{
             backgroundColor: "#111",

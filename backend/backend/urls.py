@@ -21,6 +21,7 @@ from movie import views
 
 router = routers.DefaultRouter()
 router.register(r'movies', views.MovieView, 'movie')
+router.register(r'users', views.UserList, 'user')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
